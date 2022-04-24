@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 \
 #Build React application
 FROM node:alpine AS node_builder
 COPY --from=builder /app/client ./
-RUN npm install
+RUN npm install -g npm@8.7.0
 RUN npm run build
 
 #Final Stage, this will be container
