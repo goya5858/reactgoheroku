@@ -9,17 +9,18 @@ RUN CGO_ENABLED=0 \
     go build -ldflags "-w" -a -o /main .
 
 #Build React application
-FROM node:alpine AS node_builder
-COPY --from=builder /app/client ./
-RUN npm install
-RUN npm run build
+#FROM node:alpine AS node_builder
+#COPY --from=builder /app/client ./
+#RUN npm install
+#RUN npm run build
 
 #Final Stage, this will be container
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
 COPY --from=builder /main ./server/
-COPY --from=node_builder /build ./client/build
+#COPY --from=node_builder /build ./client/build
+COPY --from=builder /app/client/build ./client/build
 WORKDIR /server
 
 RUN chmod +x ./main
