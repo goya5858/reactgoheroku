@@ -15,7 +15,9 @@ class PingComponent extends Component {
         axios.get('api/ping')
             .then((response) => {
                 this.setState(() => {
-                    return { pong: response.data.message }
+                    console.log(response.data)
+                    //return { pong: response.data.message }
+                    return { pong: response.data }
                 })
             })
             .catch(function (error) {
