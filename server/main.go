@@ -22,6 +22,7 @@ func StartBackendServer() {
 	fmt.Println("Server Started Port 8080")
 
 	http.HandleFunc("/api/ping", pingResponse)
+	// Herokuで実装する場合は環境変数からPORTを取得する
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
 
