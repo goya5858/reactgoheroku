@@ -17,8 +17,12 @@ RUN npm run build
 #Final Stage, this will be container
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
-COPY --from=builder /main ./
-COPY --from=node_builder /build ./web
+
+COPY --from=builder /main ./server/
+COPY --from=node_builder /build ./client/build
+WORKDIR /server
+
 RUN chmod +x ./main
 EXPOSE 8080
+
 CMD ./main
