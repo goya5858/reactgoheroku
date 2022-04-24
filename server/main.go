@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -21,7 +22,7 @@ func StartBackendServer() {
 	fmt.Println("Server Started Port 8080")
 
 	http.HandleFunc("/api/ping", pingResponse)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
 
 func pingResponse(w http.ResponseWriter, r *http.Request) {

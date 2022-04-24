@@ -22,6 +22,7 @@ COPY --from=builder /main ./server/
 #COPY --from=node_builder /build ./client/build
 COPY --from=builder /app/client/build ./client/build
 WORKDIR /server
+ENV PORT=8080
 
 RUN chmod +x ./main
 EXPOSE 8080
