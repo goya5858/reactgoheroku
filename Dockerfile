@@ -4,6 +4,8 @@ FROM golang:latest AS builder
 ADD . /app
 WORKDIR /app/server
 RUN go mod download
+# 使うPORTをENVで設定する
+ENV PORT=8080
 RUN CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
