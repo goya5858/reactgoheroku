@@ -22,10 +22,10 @@ RUN apk --no-cache add ca-certificates
 COPY --from=builder /main ./server/
 COPY --from=node_builder /build ./client/build
 WORKDIR /server
-# 使うPORTをENVで設定する
+# 使うPORTをENVで設定する これ意味案のか?
 #ENV PORT=8080
 
 RUN chmod +x ./main
-EXPOSE 8080
+#EXPOSE 8080
 
 CMD ./main
