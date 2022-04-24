@@ -1,5 +1,4 @@
 
-# git  reset
 #Go API
 FROM golang:latest AS builder
 ADD . /app
