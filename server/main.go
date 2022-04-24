@@ -23,8 +23,8 @@ func StartBackendServer() {
 
 	http.HandleFunc("/api/ping", pingResponse)
 	fmt.Println("Port:" + os.Getenv("PORT"))
-	//http.ListenAndServe(":"+os.Getenv("PORT"), nil) // Herokuで実装する場合は環境変数からPORTを取得する
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil) // Herokuで実装する場合は環境変数からPORTを取得する
+	//http.ListenAndServe(":8080", nil)
 }
 
 func pingResponse(w http.ResponseWriter, r *http.Request) {

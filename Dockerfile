@@ -4,8 +4,6 @@ FROM golang:latest AS builder
 ADD . /app
 WORKDIR /app/server
 RUN go mod download
-# 使うPORTをENVで設定する
-ENV PORT=8080
 RUN CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
@@ -25,7 +23,7 @@ COPY --from=builder /main ./server/
 COPY --from=node_builder /build ./client/build
 WORKDIR /server
 # 使うPORTをENVで設定する
-ENV PORT=8080
+#ENV PORT=8080
 
 RUN chmod +x ./main
 EXPOSE 8080
