@@ -26,6 +26,6 @@ WORKDIR /server
 #ENV PORT=8080
 
 RUN chmod +x ./main
-#EXPOSE 8080
+EXPOSE 8080
 
 CMD ./main
