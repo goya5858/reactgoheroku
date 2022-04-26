@@ -32,5 +32,5 @@ func StartBackendServer() {
 }
 
 func pingResponse(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "pong")
+	fmt.Fprintf(w, "pong2")
 }
