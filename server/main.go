@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/goya5858/reactgoheroku/controllers"
 )
 
 func main() {
@@ -23,6 +25,7 @@ func StartBackendServer() {
 
 	http.HandleFunc("/api/ping", pingResponse)
 	http.HandleFunc("/api", samplePage)
+	http.HandleFunc("/api/items", controllers.GET_all_items)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -38,5 +41,6 @@ func pingResponse(w http.ResponseWriter, r *http.Request) {
 }
 
 func samplePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("おはよう世界")
 	fmt.Fprintf(w, "おはよう世界")
 }
