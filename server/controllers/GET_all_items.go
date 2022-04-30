@@ -20,6 +20,7 @@ func GET_all_items_from_SQL() []*ItemParams {
 	// DataBase接続
 	fmt.Println("Connect MySQL")
 	db, err := sql.Open("mysql", "backend:docker@tcp(mysql_container:3306)/react_go_app")
+	//         sql.Open("mysql", "userName: pass@tcp(hostName:3306)/DBname")
 	if err != nil {
 		panic(err.Error())
 	}
