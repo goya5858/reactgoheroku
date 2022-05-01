@@ -18,7 +18,7 @@ const SamplePage = () => {
     return (
         <div>
             <button onClick={handleRoot}>
-                Root2
+                Root3
             </button>
             <GET_all_items/>
         </div>
