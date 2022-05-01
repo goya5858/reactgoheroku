@@ -1,11 +1,17 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
 
 	"github.com/goya5858/reactgoheroku/controllers"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 func main() {
@@ -43,4 +49,39 @@ func pingResponse(w http.ResponseWriter, r *http.Request) {
 func samplePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("おはよう世界")
 	fmt.Fprintf(w, "おはよう世界")
+	migrateDB()
+}
+
+// 先に定義しておく必要がある
+//var db *sql.DB
+//var driver database.Driver
+//var m *migrate.Migrate
+//var err error
+
+func migrateDB() {
+	// DataBase接続
+	fmt.Println("Connect MySQL")
+	db, err := sql.Open("mysql", "root:root@tcp(mysql:3306)/react_go_app?multiStatements=true")
+	//         sql.Open("mysql", "userName: pass@tcp(hostName:3306)/DBname")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+	fmt.Println("Success Connect")
+
+	fmt.Println("Get MySQL Diver")
+	driver, err := mysql.WithInstance(db, &mysql.Config{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println("Success Get Driver")
+
+	m, err := migrate.NewWithDatabaseInstance(
+		"file:///root/migrations/example1",
+		"mysql", driver,
+	)
+
+	if err := m.Up(); err != nil {
+		panic(err.Error())
+	}
 }
