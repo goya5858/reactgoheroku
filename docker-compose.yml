@@ -1,0 +1,38 @@
+version: '3'
+services:
+  golang:
+    build: .
+    container_name: golang_container 
+    tty: true 
+    #environment:
+    #  - MYSQL_URL='mysql://root:root@tcp(mysql:3306)/react_go_app?parseTime=true'
+    # Herokuでデプロイする場合はここをマニュアルで情報取得して(heroku config) 入力
+    # migrate create -ext sql -dir migrations/example1 -seq create_users_table
+    # migrate -database ${MYSQL_URL} -path migrations/example1 up コマンド用の設定
+
+  mysql:
+    image: mysql:8.0
+    platform: linux/amd64
+    #M1mac用の設定
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: react_go_app
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 3306:3306
+  
+  phpmyadmin: #MySQLへのアクセス　中身の確認用
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=mysql
+      - PMA_PASSWORD=password
+    ports:
+      - 1234:80
+    depends_on:
+      - mysql
