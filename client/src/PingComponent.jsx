@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-const PingComponent2 = () => {
+const PingComponent = () => {
     const [pingWord, setPingWord] = useState("")
     axios( {
         method: "get",
@@ -25,4 +25,4 @@ const PingComponent2 = () => {
         )
 }
 
-export default PingComponent2;
+export default PingComponent;

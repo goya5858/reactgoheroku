@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/goya5858/reactgoheroku/controllers"
 )
 
 func main() {
@@ -22,10 +24,13 @@ func StartBackendServer() {
 	fmt.Println("Server Started Port 8080")
 
 	http.HandleFunc("/api/ping", pingResponse)
+	http.HandleFunc("/api", samplePage)
+	http.HandleFunc("/api/items", controllers.GET_all_items)
+
 	port := os.Getenv("PORT")
-  	if port == "" {
-    	port = "8080"
-  	}
+	if port == "" {
+		port = "8080"
+	}
 	fmt.Println("Port:" + port)
 	http.ListenAndServe(":"+port, nil) // Herokuで実装する場合は環境変数からPORTを取得する
 	//http.ListenAndServe(":8080", nil)
@@ -33,4 +38,9 @@ func StartBackendServer() {
 
 func pingResponse(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "pong2")
+}
+
+func samplePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("おはよう世界")
+	fmt.Fprintf(w, "おはよう世界")
 }

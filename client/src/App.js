@@ -1,17 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import PingComponent2 from './PingComponent2';
+import PingComponent from './PingComponent';
+import SamplePage from './components/SamplePage';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Deploy React + Go to Heroku using Docker
         </p>
-        <PingComponent2/>
+        <PingComponent/>
+        <SamplePage/>
 
       </header>
     </div>
