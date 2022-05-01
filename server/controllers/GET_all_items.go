@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -19,7 +20,11 @@ func GET_all_items(w http.ResponseWriter, r *http.Request) {
 func GET_all_items_from_SQL() []*ItemParams {
 	// DataBase接続
 	fmt.Println("Connect MySQL")
-	db, err := sql.Open("mysql", "root:root@tcp(mysql:3306)/react_go_app?multiStatements=true")
+	driverName := os.Getenv("DATABASE_URL")
+	if driverName == "" {
+		driverName = os.Getenv("FOR_LOCAL_DBURL")
+	}
+	db, err := sql.Open("mysql", driverName)
 	//         sql.Open("mysql", "userName: pass@tcp(hostName:3306)/DBname")
 	if err != nil {
 		panic(err.Error())

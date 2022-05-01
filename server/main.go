@@ -61,7 +61,13 @@ func samplePage(w http.ResponseWriter, r *http.Request) {
 func migrateDB() {
 	// DataBase接続
 	fmt.Println("Connect MySQL")
-	db, err := sql.Open("mysql", "root:root@tcp(mysql:3306)/react_go_app?multiStatements=true")
+	driverName := os.Getenv("DATABASE_URL")
+	if driverName == "" {
+		fmt.Println("DATABASE_URL is empty")
+		driverName = os.Getenv("FOR_LOCAL_DBURL")
+		fmt.Println(driverName)
+	}
+	db, err := sql.Open("mysql", driverName)
 	//         sql.Open("mysql", "userName: pass@tcp(hostName:3306)/DBname")
 	if err != nil {
 		panic(err.Error())

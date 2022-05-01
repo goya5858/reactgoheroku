@@ -27,8 +27,8 @@ RUN apt-get update && apt-get upgrade -y && \
 # install mysql-client
 RUN apt-get update &&\
     apt-get install -y mysql-client
-
-ENV MYSQL_URL='mysql://root:root@tcp(mysql:3306)/react_go_app?multiStatements=true'
+# ここで設定したENVはローカルで使う用
+ENV FOR_LOCAL_DBURL='root:root@tcp(mysql:3306)/react_go_app?multiStatements=true'
 
 COPY ./mysql/000001_init.up.sql /root/migrations/example1/000001_init.up.sql
 COPY ./mysql/000001_init.down.sql /root/migrations/example1/000001_init.down.sql
