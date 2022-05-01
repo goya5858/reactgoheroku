@@ -49,7 +49,7 @@ func pingResponse(w http.ResponseWriter, r *http.Request) {
 func samplePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("おはよう世界")
 	fmt.Fprintf(w, "おはよう世界")
-	migrateDB()
+	//migrateDB()
 }
 
 // 先に定義しておく必要がある
