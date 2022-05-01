@@ -19,7 +19,7 @@ func GET_all_items(w http.ResponseWriter, r *http.Request) {
 func GET_all_items_from_SQL() []*ItemParams {
 	// DataBase接続
 	fmt.Println("Connect MySQL")
-	db, err := sql.Open("mysql", "backend:docker@tcp(mysql_container:3306)/react_go_app")
+	db, err := sql.Open("mysql", "root:root@tcp(mysql:3306)/react_go_app")
 	//         sql.Open("mysql", "userName: pass@tcp(hostName:3306)/DBname")
 	if err != nil {
 		panic(err.Error())
@@ -28,11 +28,13 @@ func GET_all_items_from_SQL() []*ItemParams {
 	fmt.Println("Success Connect")
 
 	// Query
+	fmt.Println("Query Start")
 	rows, err := db.Query("SELECT * FROM test_table")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer rows.Close()
+	fmt.Println("Query Done")
 
 	// 返値用のデータ作成
 	var items []*ItemParams
