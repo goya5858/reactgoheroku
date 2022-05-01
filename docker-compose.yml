@@ -21,7 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: mysql
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: react_go_app
+      MYSQL_DATABASE: heroku_4c1b06639a7b676
       TZ: 'Asia/Tokyo'
     ports:
       - 3306:3306

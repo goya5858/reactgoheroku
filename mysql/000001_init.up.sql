@@ -1,4 +1,4 @@
-USE react_go_app;
+USE heroku_4c1b06639a7b676;
 DROP TABLE IF EXISTS test_table;
  
 CREATE TABLE test_table (
