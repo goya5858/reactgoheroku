@@ -1,4 +1,3 @@
-
 #Go API
 FROM golang:latest AS builder
 ADD . /app
@@ -33,6 +32,7 @@ ENV MYSQL_URL='mysql://root:root@tcp(mysql:3306)/react_go_app?parseTime=true'
 
 COPY ./mysql/000001_init.up.sql /root/migrations/example1/000001_init.up.sql
 COPY ./mysql/000001_init.down.sql /root/migrations/example1/000001_init.down.sql
+# migrate -database ${MYSQL_URL} -path migrations/example1 up
 ##################################################
 
 COPY --from=builder /main ./server/
