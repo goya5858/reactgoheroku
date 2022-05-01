@@ -1,4 +1,4 @@
-USE heroku_4c1b06639a7b676;
+USE heroku_0198f275e6dcf77;
 DROP TABLE IF EXISTS test_table;
  
 CREATE TABLE test_table (
